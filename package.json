@@ -1,0 +1,23 @@
+{
+  "name": "smite",
+  "version": "1.0.0",
+  "description": "a smart bike computer with raspeberry pi",
+  "main": "index.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VayerMaking/cloudsinmagenta.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/VayerMaking/cloudsinmagenta/issues"
+  },
+  "homepage": "https://github.com/VayerMaking/cloudsinmagenta#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "electron": "^10.1.3"
+  }
+}
