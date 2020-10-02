@@ -23,5 +23,7 @@ contains the main python script
 ## Author
 
 Martin Vayer - [VayerMaking](https://github.com/VayerMaking)
+
 Iskren Aleksandrov - [Iskrata](https://github.com/Iskrata)
+
 Nikola Manoilov - [nikolaMAN](https://github.com/nikolaMAN)
