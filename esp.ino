@@ -1,12 +1,12 @@
-int left_btn = 1;
-int right_btn = 2;
-int left_strip_r = 3;
-int right_strip_r = 4;
-int left_strip_g = 5;
-int right_strip_g = 6;
-int left_strip_b = 7;
-int right_strip_b = 8;
-int brake = 0;
+int left_btn = 5;
+int right_btn = 4;
+int left_strip_r = 0;
+int right_strip_r = 2;
+int left_strip_g = 14;
+int right_strip_g = 12;
+int left_strip_b = 13;
+int right_strip_b = 15;
+int brake = 16;
 bool left_btn_state;
 bool right_btn_state;
 bool left_strip_state;
@@ -46,11 +46,14 @@ if(left_btn_state == 1){
   analogWrite(left_strip_g, 100);
   analogWrite(left_strip_b, 0);
   left_strip_state = 1;
+  Serial.println("levo");
 }else{
   analogWrite(left_strip_r, 0);
   analogWrite(left_strip_g, 0);
   analogWrite(left_strip_b, 0);
   left_strip_state = 0;
+  Serial.println("nelevo");
+
 }
 
 if(right_btn_state == 1){
@@ -58,11 +61,15 @@ if(right_btn_state == 1){
   analogWrite(right_strip_g, 100);
   analogWrite(right_strip_b, 0);
   right_strip_state = 1;
+  Serial.println("desno");
+
 }else{
   analogWrite(right_strip_r, 0);
   analogWrite(right_strip_g, 0);
   analogWrite(right_strip_b, 0);
   right_strip_state = 0;
+  Serial.println("nedesno");
+
 }
 
 }
