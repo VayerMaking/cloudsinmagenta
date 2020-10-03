@@ -6,7 +6,7 @@ function createWindow () {
   const win = new BrowserWindow({
     width: 320,
     height: 480,
-    fullscreen: false,
+    fullscreen: true,
     webPreferences: {
       nodeIntegration: true
     }
