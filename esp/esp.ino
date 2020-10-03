@@ -7,11 +7,11 @@ int right_strip_g = 12;
 int left_strip_b = 13;
 int right_strip_b = 15;
 int brake = 16;
-bool left_btn_state;
-bool right_btn_state;
-bool left_strip_state;
-bool right_strip_state;
-bool brake_state;
+int left_btn_state;
+int right_btn_state;
+int left_strip_state;
+int right_strip_state;
+int brake_state;
 
 void setup() {
   Serial.begin(115200);
@@ -41,33 +41,33 @@ void loop(){
 left_btn_state = digitalRead(left_btn);
 right_btn_state = digitalRead(right_btn);
 
-if(left_btn_state == 1){
+if(left_btn_state == HIGH){
   analogWrite(left_strip_r, 255);
   analogWrite(left_strip_g, 100);
   analogWrite(left_strip_b, 0);
-  left_strip_state = 1;
+  left_strip_state = HIGH;
   Serial.println("levo");
 }else{
   analogWrite(left_strip_r, 0);
   analogWrite(left_strip_g, 0);
   analogWrite(left_strip_b, 0);
-  left_strip_state = 0;
+  left_strip_state = LOW;
   Serial.println("nelevo");
 
 }
 
-if(right_btn_state == 1){
+if(right_btn_state == HIGH){
   analogWrite(right_strip_r, 255);
   analogWrite(right_strip_g, 100);
   analogWrite(right_strip_b, 0);
-  right_strip_state = 1;
+  right_strip_state = HIGH;
   Serial.println("desno");
 
 }else{
   analogWrite(right_strip_r, 0);
   analogWrite(right_strip_g, 0);
   analogWrite(right_strip_b, 0);
-  right_strip_state = 0;
+  right_strip_state = LOW;
   Serial.println("nedesno");
 
 }
