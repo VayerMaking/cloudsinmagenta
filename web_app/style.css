@@ -1,0 +1,42 @@
+body {
+    margin: auto;
+    background-attachment: fixed;
+    color: white;
+    background-color: #3e423e;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+}
+
+h1 {
+    text-align: center;
+    text-transform: uppercase;
+}
+.tag {
+    margin-top: 50%;
+    text-align: center;
+    text-transform: uppercase;
+}
+.speed {
+    font-size: 320%;
+    margin-top: 5%;
+}
+
+
+.button {
+    background-color: #4a4f4a;
+    border: none;
+    color: white;
+    margin: 4px 2px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 15px 32px;
+}
+.bright{float:right;}
+.bleft{float:left;}
+
+span {
+    text-align: center;
+    text-transform: uppercase;
+}
