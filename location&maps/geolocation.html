@@ -8,20 +8,13 @@
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDSTekXTojzx2JpBfMjA9HhvTputjS3prY&callback=initMap&libraries=&v=weekly"
         defer></script>
     <style type="text/css">
-        /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
         #map {
-            /*margin: center;*/
-
             margin-left: auto;
             margin-right: auto;
             height: 430px;
-            /* The heght is 400 pixels */
             width: 275px;
-            /* The width is the width of the web page */
         }
 
-        /* Optional: Makes the sample page fill the window. */
         html,
         body {
             padding: 0;
@@ -36,10 +29,7 @@
             text-align: center;
             text-transform: uppercase;
         }
-        /*table{
-            margin:auto;
-            /*margin-top:auto;
-        }*/
+       
     
         td{
             text-align:center;
@@ -55,22 +45,19 @@
 			cursor: pointer;
 			padding: 10px 10px;
 		}
-		.bleft{float:left;}
+        .bleft{float:left;}
+
     </style>
     <script>
-        // Note: This example requires that you consent to location sharing when
-        // prompted by your browser. If you see the error "The Geolocation service
-        // failed.", it means you probably did not give permission for the browser to
-        // locate you.
+
         let map, infoWindow;
 
         function initMap() {
             map = new google.maps.Map(document.getElementById("map"), {
-                //center: { lat: -34.397, lng: 150.644 },
+
                 zoom: 16,
             });
             infoWindow = new google.maps.InfoWindow();
-            // Try HTML5 geolocation.
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(
                     (position) => {
@@ -78,10 +65,9 @@
                             lat: position.coords.latitude,
                             lng: position.coords.longitude,
                         };
-                        //infoWindow.setPosition(pos);
+
                         var uluru = { lat: position.coords.latitude,lng: position.coords.longitude};
                         var marker = new google.maps.Marker({ position: uluru, map: map });
-                        //infoWindow.setContent(marker);
                         infoWindow.open(map);
                         map.setCenter(pos);
                     },
@@ -90,7 +76,7 @@
                     }
                 );
             } else {
-                // Browser doesn't support Geolocation
+
                 handleLocationError(false, infoWindow, map.getCenter());
             }
         }
@@ -106,12 +92,12 @@
         }
     </script>
 </head>
-
+/**/
 <body>
     <h1></h1>
     <table >
         <td>
-            <button class="button bleft"><</button>
+            <button class="button bleft"><a href="./smike.html"><</a></button>
         </td>
         <td>
             <div id="map"></div>
