@@ -1,4 +1,4 @@
-
+#include "DHT.h"
 #include <FastLED.h>
 #define NUM_LEDS 5
 #define DATA_PIN 5
@@ -14,6 +14,11 @@ void setup() {
 
 
 void loop() {
+
+int rt = dht.rt;
+int lt = dht.lt;
+
+
 
 right_turn();
 
