@@ -1,75 +1,80 @@
-int left_btn = 5;
-int right_btn = 4;
-int left_strip_r = 0;
-int right_strip_r = 2;
-int left_strip_g = 14;
-int right_strip_g = 12;
-int left_strip_b = 13;
-int right_strip_b = 15;
-int brake = 16;
-int left_btn_state;
-int right_btn_state;
-int left_strip_state;
-int right_strip_state;
-int brake_state;
+
+#include <FastLED.h>
+#define NUM_LEDS 5
+#define DATA_PIN 5
+
+CRGB leds[NUM_LEDS];
 
 void setup() {
-  Serial.begin(115200);
-  // Initialize the output variables as outputs
-  pinMode(left_btn, INPUT);
-  pinMode(right_btn, INPUT);
-  pinMode(brake, INPUT);
-  pinMode(left_strip_r, OUTPUT);
-  pinMode(right_strip_r, OUTPUT);
-  pinMode(left_strip_g, OUTPUT);
-  pinMode(right_strip_g, OUTPUT);
-  pinMode(left_strip_b, OUTPUT);
-  pinMode(right_strip_b, OUTPUT);
-  // Set outputs to LOW
-  digitalWrite(left_strip_r, LOW);
-  digitalWrite(right_strip_r, LOW);
-  digitalWrite(left_strip_g, LOW);
-  digitalWrite(right_strip_g, LOW);
-  digitalWrite(left_strip_b, LOW);
-  digitalWrite(right_strip_b, LOW);
-
-
+  Serial.begin(57600);
+  Serial.println("resetting");
+  LEDS.addLeds<WS2812,DATA_PIN,RGB>(leds,NUM_LEDS);
+  LEDS.setBrightness(84);
 }
 
-void loop(){
 
-left_btn_state = digitalRead(left_btn);
-right_btn_state = digitalRead(right_btn);
+void loop() {
 
-if(left_btn_state == HIGH){
-  analogWrite(left_strip_r, 255);
-  analogWrite(left_strip_g, 100);
-  analogWrite(left_strip_b, 0);
-  left_strip_state = HIGH;
-  Serial.println("levo");
-}else{
-  analogWrite(left_strip_r, 0);
-  analogWrite(left_strip_g, 0);
-  analogWrite(left_strip_b, 0);
-  left_strip_state = LOW;
-  Serial.println("nelevo");
+asdf2();
+
+asdf();
 
 }
-
-if(right_btn_state == HIGH){
-  analogWrite(right_strip_r, 255);
-  analogWrite(right_strip_g, 100);
-  analogWrite(right_strip_b, 0);
-  right_strip_state = HIGH;
-  Serial.println("desno");
-
-}else{
-  analogWrite(right_strip_r, 0);
-  analogWrite(right_strip_g, 0);
-  analogWrite(right_strip_b, 0);
-  right_strip_state = LOW;
-  Serial.println("nedesno");
+void asdf(){
+      right(255,255,0, 50);
+  right(0,0,0, 50);
+  delay(2000);
 
 }
+void asdf2(){
+  left(255,255,0, 50);
+ left(0,0,0, 50);
+ delay(2000);
 
+}
+void left(byte red, byte green, byte blue, int SpeedDelay) {
+  int i = 4;
+  while(i>-1) {
+      setPixel(i, red, green, blue);
+      showStrip();
+      delay(SpeedDelay);
+      i--;
+
+  }
+
+}
+void right(byte red, byte green, byte blue, int SpeedDelay) {
+  for(uint16_t i=0; i<NUM_LEDS; i++) {
+      setPixel(i, red, green, blue);
+      showStrip();
+      delay(SpeedDelay);
+
+  }
+
+}
+void showStrip() {
+ #ifdef ADAFRUIT_NEOPIXEL_H
+   strip.show();
+ #endif
+ #ifndef ADAFRUIT_NEOPIXEL_H
+   FastLED.show();
+ #endif
+}
+
+void setPixel(int Pixel, byte red, byte green, byte blue) {
+ #ifdef ADAFRUIT_NEOPIXEL_H
+   strip.setPixelColor(Pixel, strip.Color(red, green, blue));
+ #endif
+ #ifndef ADAFRUIT_NEOPIXEL_H
+   leds[Pixel].r = red;
+   leds[Pixel].g = green;
+   leds[Pixel].b = blue;
+ #endif
+}
+
+void setAll(byte red, byte green, byte blue) {
+  for(int i = 0; i < NUM_LEDS; i++ ) {
+    setPixel(i, red, green, blue);
+  }
+  showStrip();
 }
