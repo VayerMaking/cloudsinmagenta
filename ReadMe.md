@@ -4,7 +4,11 @@
 
 a smart bike computer with raspeberry pi
 
-
+*navigation
+*time
+*antitheft
+*brake lights
+*turn signalisation
 
 ## First ofc
 
@@ -14,11 +18,19 @@ a smart bike computer with raspeberry pi
 ## How to use
 
 ```sh
-main.py
+mqqt.py
 ```
-contains the main python script
+contains the python script responible for the communication with the esp
 
+```sh
+esp.ino
+```
+contains arduino script that controls the rgb strips and connects to the raspberry pi
 
+```sh
+web_app/
+```
+contains the electron web_app with the interface of the project(basically the heart of the project <3)
 
 ## Author
 
