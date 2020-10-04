@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>User_Location</title>
+    <title>Map</title>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <script defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDSTekXTojzx2JpBfMjA9HhvTputjS3prY&callback=initMap">
@@ -52,6 +52,22 @@
         }
     </style>
     <script>
+        var SerialPort = require('serialport');
+        var port = new SerialPort.SerialPort('/dev/rfcomm0', { 
+        parser: SerialPort.parsers.readline('\r\n')
+        });
+
+        var GPS = require('gps');
+        var gps = new GPS;
+
+        gps.on('data', function(data) {
+        console.log(data, gps.state);
+        });
+
+        port.on('data', function(data) {
+        gps.updatePartial(data);
+        }); 
+        
 
         let map, infoWindow;
 
