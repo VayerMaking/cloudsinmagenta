@@ -7,7 +7,7 @@ function time() {
     if(hrs == 0){
         hrs = 12;
     }
-    if(hrs < 12){
+    if(hrs < 10){
         hrs = '0' + hrs
     }
     if(min < 10){
