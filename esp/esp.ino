@@ -15,42 +15,40 @@ void setup() {
 
 void loop() {
 
-asdf2();
+right_turn();
 
-asdf();
+left_turn();
 
 }
-void asdf(){
-      right(255,255,0, 50);
+void right_turn(){
+  right(255,255,0, 50);
   right(0,0,0, 50);
   delay(2000);
-
 }
-void asdf2(){
+void left_turn(){
   left(255,255,0, 50);
- left(0,0,0, 50);
- delay(2000);
-
+  left(0,0,0, 50);
+  delay(2000);
+}
+void stop(){
+  setPixel(0, 255, 0, 0);
+  showStrip();
 }
 void left(byte red, byte green, byte blue, int SpeedDelay) {
   int i = 4;
   while(i>-1) {
-      setPixel(i, red, green, blue);
-      showStrip();
-      delay(SpeedDelay);
-      i--;
-
+    setPixel(i, red, green, blue);
+    showStrip();
+    delay(SpeedDelay);
+    i--;
   }
-
 }
 void right(byte red, byte green, byte blue, int SpeedDelay) {
   for(uint16_t i=0; i<NUM_LEDS; i++) {
-      setPixel(i, red, green, blue);
-      showStrip();
-      delay(SpeedDelay);
-
+    setPixel(i, red, green, blue);
+    showStrip();
+    delay(SpeedDelay);
   }
-
 }
 void showStrip() {
  #ifdef ADAFRUIT_NEOPIXEL_H
