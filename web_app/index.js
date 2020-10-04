@@ -1,9 +1,12 @@
 const { app, BrowserWindow } = require('electron')
 
+let mainWindow;
+
 function createWindow () {
   const win = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 320,
+    height: 480,
+    fullscreen: true,
     webPreferences: {
       nodeIntegration: true
     }
@@ -14,7 +17,9 @@ function createWindow () {
   //win.webContents.openDevTools()
 }
 
-app.whenReady().then(createWindow)
+app.on("ready", ()=>{
+  createWindow();
+})
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
