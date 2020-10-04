@@ -1,60 +1,124 @@
 <!DOCTYPE html>
 <html>
-<style>
-    #map {
-        height: 400px;
-        /* The height is 400 pixels */
-        width: 100%;
-        /* The width is the width of the web page */
-    }
-</style>
 
-<body>
+<head>
+    <title>User_Location</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDSTekXTojzx2JpBfMjA9HhvTputjS3prY&callback=initMap&libraries=&v=weekly"
+        defer></script>
+    <style type="text/css">
+        /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+        #map {
+            /*margin: center;*/
 
-    <button onclick="getLocation()">location</button>
-    <p id="demo"></p>
+            margin-left: auto;
+            margin-right: auto;
+            height: 430px;
+            /* The heght is 400 pixels */
+            width: 275px;
+            /* The width is the width of the web page */
+        }
+
+        /* Optional: Makes the sample page fill the window. */
+        html,
+        body {
+            padding: 0;
+            margin: auto;
+            background-attachment: fixed;
+            color: white;
+            background-color: #3e423e;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+            text-transform: uppercase;
+        }
+        /*table{
+            margin:auto;
+            /*margin-top:auto;
+        }*/
+    
+        td{
+            text-align:center;
+        }
+        .button {
+			background-color: #4a4f4a;
+			border: none;
+			color: white;
+			/*margin: 2px 2px;*/
+			text-align: center;
+			text-decoration: none;
+			font-size: 16px;
+			cursor: pointer;
+			padding: 10px 10px;
+		}
+		.bleft{float:left;}
+    </style>
     <script>
-        var x = document.getElementById("demo");
+        // Note: This example requires that you consent to location sharing when
+        // prompted by your browser. If you see the error "The Geolocation service
+        // failed.", it means you probably did not give permission for the browser to
+        // locate you.
+        let map, infoWindow;
 
-        function getLocation() {
+        function initMap() {
+            map = new google.maps.Map(document.getElementById("map"), {
+                //center: { lat: -34.397, lng: 150.644 },
+                zoom: 16,
+            });
+            infoWindow = new google.maps.InfoWindow();
+            // Try HTML5 geolocation.
             if (navigator.geolocation) {
-                navigator.geolocation.watchPosition(showPosition);
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const pos = {
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude,
+                        };
+                        //infoWindow.setPosition(pos);
+                        var uluru = { lat: position.coords.latitude,lng: position.coords.longitude};
+                        var marker = new google.maps.Marker({ position: uluru, map: map });
+                        //infoWindow.setContent(marker);
+                        infoWindow.open(map);
+                        map.setCenter(pos);
+                    },
+                    () => {
+                        handleLocationError(true, infoWindow, map.getCenter());
+                    }
+                );
             } else {
-                x.innerHTML = "Geolocation is not supported by this browser.";
+                // Browser doesn't support Geolocation
+                handleLocationError(false, infoWindow, map.getCenter());
             }
         }
-     //   function showMap(position) {
-            // Get location data
-            //var latlong = position.coords.latitude + "," + position.coords.longitude;
 
-            // Set Google map source url
-            //var mapLink = "https://maps.googleapis.com/maps/api/staticmap?center=" + latlong + "&zoom=16&size=400x300&output=embed&key=AIzaSyDSTekXTojzx2JpBfMjA9HhvTputjS3prY";
-
-            // Create and insert Google map
-            //document.getElementById("embedMap").innerHTML = "<img alt='Map Holder' src='" + mapLink + "'>";
-       // }
-        /* Set the size of the div element that contains the map */
-        // Initialize and add the map
-        function initMap() {
-            // The location of Uluru
-            var uluru = { lat: -25.344, lng: 131.036 };
-            // The map, centered at Uluru
-            var map = new google.maps.Map(
-                document.getElementById('map'), { zoom: 4, center: uluru });
-            // The marker, positioned at Uluru
-            var marker = new google.maps.Marker({ position: uluru, map: map });
+        function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+            infoWindow.setPosition(pos);
+            infoWindow.setContent(
+                browserHasGeolocation
+                    ? "Error: The Geolocation service failed."
+                    : "Error: Your browser doesn't support geolocation."
+            );
+            infoWindow.open(map);
         }
     </script>
-    <!--Load the API from the specified URL
-            * The async attribute allows the browser to render the page while the API loads
-                * The key parameter will contain your own API key(which is not needed for this tutorial)
-     * The callback parameter executes the initMap() function
-     -->
-    <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDSTekXTojzx2JpBfMjA9HhvTputjS3prY&callback=initMap">
-    </script>
-    <h3>My Google Maps Demo</h3>
-    <!--The div element for the map-->
+</head>
+
+<body>
+    <h1></h1>
+    <table >
+        <td>
+            <button class="button bleft"><</button>
+        </td>
+        <td>
+            <div id="map"></div>
+        </td>
+    </table>
     <div id="map"></div>
+
 </body>
 
 </html>
