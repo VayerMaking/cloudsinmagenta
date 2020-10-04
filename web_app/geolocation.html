@@ -56,7 +56,7 @@
         var port = new SerialPort.SerialPort('/dev/rfcomm0', { 
         parser: SerialPort.parsers.readline('\r\n')
         });
-
+        //data=  "$GPGGA,191214,4240.95569,N,02321.51008,E,1,00,,597.457,M,,M,,*7B"
         var GPS = require('gps');
         var gps = new GPS;
 
@@ -67,13 +67,13 @@
         port.on('data', function(data) {
         gps.updatePartial(data);
         }); 
-        
 
+        data = gps.update(data)
         let map, infoWindow;
 
         function initMap() {
             // The location of Uluru
-            var uluru = { lat: 42.683700, lng: 23.317940 };
+            var uluru = { lat: data.lat, lng: data.lon };
             // The map, centered at Uluru
             var map = new google.maps.Map(
                 document.getElementById('map'), { zoom: 16, center: uluru });
