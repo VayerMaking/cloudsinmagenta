@@ -1,17 +1,21 @@
-import googlemaps
-from datetime import datetime
+import socket
+import sys
 
-gmaps = googlemaps.Client(key='AIzaSyDSTekXTojzx2JpBfMjA9HhvTputjS3prY')
+# Create a TCP/IP socket
+sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
-# Geocoding an address
-geocode_result = gmaps.geocode('1600 Amphitheatre Parkway, Mountain View, CA')
+# Bind the socket to the port
+server_address = ('192.168.0.101', 5555)
+print (sys.stderr, 'starting up on %s port %s' % server_address)
+sock.bind(server_address)
 
-# Look up an address with reverse geocoding
-reverse_geocode_result = gmaps.reverse_geocode((40.714224, -73.961452))
+while True:
+    print (sys.stderr, '\nwaiting to receive message')
+    data, address = sock.recvfrom(4096)
 
-# Request directions via public transit
-now = datetime.now()
-directions_result = gmaps.directions("Sydney Town Hall",
-                                     "Parramatta, NSW",
-                                     mode="transit",
-                                     departure_time=now)
+    print (sys.stderr, 'received %s bytes from %s' % (len(data), address))
+    print (sys.stderr, data)
+
+    if data:
+        sent = sock.sendto(data, address)
+        print (sys.stderr, 'sent %s bytes back to %s' % (sent, address))
