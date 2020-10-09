@@ -1,6 +1,6 @@
 # Smike
 
-
+by Magen7a with <3
 
 a smart bike computer with raspeberry pi
 
@@ -9,6 +9,8 @@ a smart bike computer with raspeberry pi
 *antitheft
 *brake lights
 *turn signalisation
+## Presentation
+https://docs.google.com/presentation/d/1UGjas8NT5oA8QxRQqg8FWWSRiS5ZLZBkOiXx0IDx5vE/edit?usp=sharing
 
 ## First ofc
 
